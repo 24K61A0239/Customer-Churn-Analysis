@@ -1,0 +1,67 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, classification_report
+
+# Load Dataset
+df = pd.read_csv("customer_churn.csv")
+
+print("Dataset Shape:", df.shape)
+print(df.head())
+
+# Data Cleaning
+df = df.drop_duplicates()
+df = df.fillna(0)
+
+# Convert categorical columns
+df = pd.get_dummies(df, drop_first=True)
+
+# Target Column
+target = "Churn"
+
+X = df.drop(target, axis=1)
+y = df[target]
+
+# Train-Test Split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# Model Training
+model = RandomForestClassifier(random_state=42)
+model.fit(X_train, y_train)
+
+# Prediction
+y_pred = model.predict(X_test)
+
+# Accuracy
+accuracy = accuracy_score(y_test, y_pred)
+
+print("\nAccuracy:", accuracy)
+print("\nClassification Report:")
+print(classification_report(y_test, y_pred))
+
+# Churn Distribution Plot
+plt.figure(figsize=(6,4))
+y.value_counts().plot(kind='bar')
+plt.title("Customer Churn Distribution")
+plt.xlabel("Churn")
+plt.ylabel("Count")
+plt.savefig("output/churn_distribution.png")
+plt.close()
+
+# Feature Importance Plot
+importance = pd.Series(
+    model.feature_importances_,
+    index=X.columns
+).sort_values(ascending=False)
+
+plt.figure(figsize=(8,5))
+importance.head(10).plot(kind='bar')
+plt.title("Top 10 Important Features")
+plt.tight_layout()
+plt.savefig("output/feature_importance.png")
+plt.close()
+
+print("\nAnalysis Completed Successfully!")
