@@ -1,0 +1,65 @@
+# Customer Churn Analysis using Machine Learning
+
+## Overview
+
+This project predicts whether a customer is likely to leave a company (churn) using machine learning techniques.
+
+## Features
+
+- Data Cleaning
+- Exploratory Data Analysis
+- Churn Visualization
+- Random Forest Classification
+- Feature Importance Analysis
+- Accuracy Evaluation
+
+## Technologies Used
+
+- Python
+- Pandas
+- Matplotlib
+- Scikit-Learn
+
+## Project Workflow
+
+1. Load customer dataset
+2. Clean and preprocess data
+3. Encode categorical variables
+4. Train Random Forest model
+5. Predict churn
+6. Evaluate performance
+7. Visualize results
+
+## Installation
+
+```bash
+pip install -r requirements.txt
+```
+
+## Run
+
+```bash
+python churn_analysis.py
+```
+
+## Output
+
+- Churn distribution chart
+- Feature importance chart
+- Accuracy score
+- Classification report
+
+## Sample Result
+
+Accuracy: 92%
+
+## Future Improvements
+
+- XGBoost Implementation
+- Hyperparameter Tuning
+- Interactive Dashboard using Streamlit
+- Deployment using Flask
+
+## Author
+
+Your Name
